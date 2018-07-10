@@ -1,0 +1,51 @@
+<!--node.js 静态资源管理 -->
+//引入的组建模块 http、fs
+
+let  http=require("http");//开启http服务器
+
+let fs=require('fs');//文件系统
+
+let path=require("path");//生成路径
+
+<!-- 引入第三方模板 -->
+let mime=require("mime");
+
+let querystring=require('querystring');//引入querystring模板
+
+<!-- 配置网站根目录 -->
+let rootpath=path.join(_dirname,"www");
+<!-- 创建一个服务 -->
+var server=http.createServer(function(request,response){
+    response.setHeader("content-type:text/html;charset=utf-8");
+    let filePath=path.join(rootPath,querystring.unescape(request.url));
+
+    let isExist=fs.existsSync(filePath);
+    if(isExist){
+        fs.readdir(filePath,(err,files)=>{
+            if(err){
+                <!-- console.log("不是文件");
+                 -->
+                 
+            }else{
+                
+            }
+        })
+    }
+
+
+    fs.readFile("",function(err,data){
+        //判断文件是否读取失败
+        if(err){
+            console.log(err);
+        }else{
+            <!-- 读取成功响应强求 -->
+            response.end(data);
+        }
+    })
+})
+
+<!-- 读取文件 -->
+<!-- 监听一个端口 -->
+server.listen(80,'127.0.0.1',function(){
+    console.log("成功了");
+})
